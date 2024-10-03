@@ -2,16 +2,17 @@ let canvas = document.querySelector("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let context = canvas.getContext("2d");
+
 DrawBackground();
+DrawLogo();
+
 function DrawBackground() {
 	context.fillStyle = "black";
 	context.beginPath();
 	context.rect(0, 0, 300, 300);
-	context.stroke();
 	context.fill();
 }
 
-DrawLogo();
 function DrawLogo() {
 	context.fillStyle = "#94A7DF";
 
@@ -26,6 +27,6 @@ function DrawLogo() {
 	context.rect(20, 220, 50, 50);
 	context.rect(170, 220, 50, 50);
 	context.rect(220, 220, 50, 50);
-	context.stroke();
+
 	context.fill();
 }
