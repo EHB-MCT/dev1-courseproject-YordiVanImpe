@@ -9,39 +9,38 @@ let offset = 10;
 context.fillStyle = "black";
 context.fillRect(0, 0, width, height);
 
+context.fillStyle = "black";
+context.fillRect(0, 0, width, height);
 
-
-DrawLogo();
+DrawLogo(1400, 600, 20, 20); //  parameters voor positie en grootte
 update();
-playButton();
+playButton(width / 2, height / 2, 100, 5); // parameters voor positie, grootte en lijn dikte
+
 
 window.onmousemove = move;
-//
-// gebruik gemaakt van Peter Dick's Noise functie @Erasmushogeschool Brussel
 
-function playButton() {
-	let x = width / 2;
-	let y = height / 2;
-	context.lineWidth = 5;
-	context.strokeStyle = Utils.hsla(Math.random() * 360, 80, 70, 100);
-	Utils.strokeCircle(x, height / 2, 100);
-	context.beginPath();
-	context.moveTo(x - 40 + offset, y - 40);
-	for (let i = 1; i < 3; i++) {
-		let s = i % 2;
-		let xPos = x + (-40 + 80 * s) + offset;
-		let yPos = y + (-40 + 40 * i);
-		context.lineTo(xPos, yPos);
-	}
-	context.closePath();
-	context.stroke();
+function playButton(x, y, radius, lineWidth) {
+    context.lineWidth = lineWidth;
+    context.strokeStyle = Utils.hsla(Math.random() * 360, 80, 70, 100);
+    Utils.strokeCircle(x, y, radius);
+    context.beginPath();
+    context.moveTo(x - 40 + offset, y - 40);
+    for (let i = 1; i < 3; i++) {
+        let s = i % 2;
+        let xPos = x + (-40 + 80 * s) + offset;
+        let yPos = y + (-40 + 40 * i);
+        context.lineTo(xPos, yPos);
+    }
+    context.closePath();
+    context.stroke();
 }
+
 
 function update() {
-	
-	playButton();
-	requestAnimationFrame(update);
+    playButton(width / 2, height / 2, 100, 5); 
+    requestAnimationFrame(update);
 }
+
 
 function DrawLogo() {
 	context.fillStyle = "#94A7DF";
@@ -66,8 +65,8 @@ function DrawLogo() {
  */
 function move(e) {
 	console.log(e.pageX);
-    context.fillStyle = "black";
-    context.fillRect(0, 0, width, height);
+	context.fillStyle = "black";
+	context.fillRect(0, 0, width, height);
 	for (let j = 0; j < 7; j++) {
 		let r = Math.random() * 30;
 		let g = 10;
@@ -81,8 +80,6 @@ function move(e) {
 			let y =
 				height / 3 + Noise.perlinNoise((i - 2 * j) / e.pageX) * 200 + 10 * j;
 			context.strokeRect(x, y, 1, 1);
-            
 		}
 	}
-
 }
