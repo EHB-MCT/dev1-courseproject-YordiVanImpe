@@ -8,32 +8,16 @@ let offset = 10;
 
 context.fillStyle = "black";
 context.fillRect(0, 0, width, height);
-let colorAngle = 0;
-perlin();
-playButton();
-DrawLogo();
-let frameCount = 0;
-update();
-window.onmousemove = move;
 
+
+
+DrawLogo();
+update();
+playButton();
+
+window.onmousemove = move;
 //
 // gebruik gemaakt van Peter Dick's Noise functie @Erasmushogeschool Brussel
-function perlin() {
-	for (let j = 0; j < 7; j++) {
-		let r = Math.random() * 30;
-		let g = 10;
-		let b = 20;
-		let a = Math.random() * 15 + 60;
-		context.strokeStyle = Utils.rgba(r, g, b, a);
-		context.lineWidth = 5;
-
-		for (let i = 0; i <= width; i++) {
-			let x = i;
-			let y = height / 3 + Noise.perlinNoise((i - 2 * j) / 300) * 200 + 10 * j;
-			context.strokeRect(x, y, 1, 1);
-		}
-	}
-}
 
 function playButton() {
 	let x = width / 2;
@@ -54,7 +38,7 @@ function playButton() {
 }
 
 function update() {
-	perlin();
+	
 	playButton();
 	requestAnimationFrame(update);
 }
@@ -78,16 +62,27 @@ function DrawLogo() {
 }
 /**
  *
- * @param {MouseEvent} eventData
+ * @param {MouseEvent} e
  */
-function move(eventData) {
-	let x = eventData.pageX;
-	let y = eventData.pageY;
+function move(e) {
+	console.log(e.pageX);
+    context.fillStyle = "black";
+    context.fillRect(0, 0, width, height);
+	for (let j = 0; j < 7; j++) {
+		let r = Math.random() * 30;
+		let g = 10;
+		let b = 20;
+		let a = Math.random() * 15 + 60;
+		context.strokeStyle = Utils.rgba(r, g, b, a);
+		context.lineWidth = 5;
 
 		for (let i = 0; i <= width; i++) {
-			 x = i;
-			 y = height / 3 + Noise.perlinNoise((i - 2 * j) / 300) * 200 + 10 * j;
+			let x = i;
+			let y =
+				height / 3 + Noise.perlinNoise((i - 2 * j) / e.pageX) * 200 + 10 * j;
 			context.strokeRect(x, y, 1, 1);
+            
 		}
-	
+	}
+
 }
