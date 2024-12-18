@@ -34,7 +34,7 @@ function playButton(x, y, radius, lineWidth) {
 	context.closePath();
 	context.stroke();
 }
-
+//animatie voor de playbutton en zorgt ervoor dat het logo blijft staan
 function update() {
 	playButton(width / 2, height / 2, 100, 5);
 	DrawLogo();
